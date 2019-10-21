@@ -52,9 +52,12 @@ before_script:
  #执行测试脚本
  - ./gradlew test
  - ./gradlew connectedAndroidTest
+ - ./gradlew jacocoTestReport
 script:
  #构建版本
  - ./gradlew assembleRelease
+after_success:
+ - bash <(curl -s https://codecov.io/bash)
 after_script:
 #发布蒲公英
  - set -e
