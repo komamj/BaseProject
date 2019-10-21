@@ -61,4 +61,4 @@ after_success:
 after_script:
 #发布蒲公英
  - set -e
- - $TRAVIS_BUILD_DIR/pgyer_upload.sh "${TRAVIS_BUILD_DIR}/app/build/outputs/apk/release/app-release-unsigned.apk" 1ffafb3680dc6131e41428163082c76a
+ - $TRAVIS_BUILD_DIR/pgyer_upload.sh "${TRAVIS_BUILD_DIR}/app/build/outputs/apk/release/app-release.apk" 1ffafb3680dc6131e41428163082c76a
