@@ -8,6 +8,8 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'jacoco-android'
 
+apply plugin: 'kotlin-allopen'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -19,6 +21,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String","BASE_URL","\"http://139.198.4.126:8080/\""
+        buildConfigField "String","THUMBNAIL_URL","\"http://139.198.4.126:8080/image/\""
     }
 
     compileOptions {
@@ -49,6 +52,11 @@ android {
             signingConfig signingConfigs.config
         }
     }
+}
+
+allOpen {
+    // allows mocking for classes w/o directly opening them for release builds
+    annotation 'com.oppo.cac.base.annotation.OpenClass'
 }
 
 dependencies {

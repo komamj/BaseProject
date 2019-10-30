@@ -5,6 +5,7 @@
 
     <data>
         <import type="com.oppo.cac.base.data.entities.News"/>
+        <import type="android.view.View"/>
         <variable
                 name="news"
                 type="News" />
@@ -40,21 +41,24 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    app:image_url="@{news.thumbnailOne}"/>
+                    android:visibility="@{news.thumbnailUrls.size() > 0 ? View.VISIBLE : View.GONE}"
+                    app:image_url="@{news.thumbnailUrls.size() > 0 ? news.thumbnailUrls.get(0) : null}"/>
 
             <ImageView
                     android:id="@+id/iv_thumbnail_1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    app:image_url="@{news.thumbnailTwo}"/>
+                    android:visibility="@{news.thumbnailUrls.size() > 1 ? View.VISIBLE : View.GONE}"
+                    app:image_url="@{news.thumbnailUrls.size() > 1 ? news.thumbnailUrls.get(1) : null}" />
 
             <ImageView
                     android:id="@+id/iv_thumbnail_2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    app:image_url="@{news.thumbnailThree}"/>
+                    android:visibility="@{news.thumbnailUrls.size() > 2 ? View.VISIBLE : View.GONE}"
+                    app:image_url="@{news.thumbnailUrls.size() > 2 ? news.thumbnailUrls.get(2) : null}" />
 
         </LinearLayout>
 
