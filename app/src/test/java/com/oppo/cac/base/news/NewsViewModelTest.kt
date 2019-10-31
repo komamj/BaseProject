@@ -1,5 +1,6 @@
 package com.oppo.cac.base.news
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.oppo.cac.base.data.entities.News
 import com.oppo.cac.base.data.source.NewsRepository
 import com.oppo.cac.base.util.RxJavaRule
@@ -24,18 +25,23 @@ class NewsViewModelTest {
     @JvmField
     var rxJava: RxJavaRule = RxJavaRule()
 
+    @get:Rule
+    val rule = InstantTaskExecutorRule()
+
     @Before
     fun setUp() {
         viewModel = NewsViewModel(repository)
     }
 
-    private val testScheduler=TestScheduler()
+    private val testScheduler = TestScheduler()
 
     @Test
     fun `should return true when getNews is loading`() {
         Assert.assertFalse(viewModel.isLoading)
-        `when`(repository.getNews()).thenReturn(Observable.just(emptyList<News>())
-            .observeOn(testScheduler))
+        `when`(repository.getNews()).thenReturn(
+            Observable.just(emptyList<News>())
+                .observeOn(testScheduler)
+        )
         viewModel.getNews()
         Assert.assertTrue(viewModel.isLoading)
         verify(repository).getNews()
@@ -58,9 +64,8 @@ class NewsViewModelTest {
         verify(repository).getNews()
         Assert.assertEquals(viewModel.newsList.value?.size, 3)
         Assert.assertEquals(news1, viewModel.newsList.value?.get(0))
-        Assert.assertEquals(news2,viewModel.newsList.value?.get(1))
-        Assert.assertEquals(news3,viewModel.newsList.value?.get(2))
-
+        Assert.assertEquals(news2, viewModel.newsList.value?.get(1))
+        Assert.assertEquals(news3, viewModel.newsList.value?.get(2))
     }
 
     @Test
@@ -73,7 +78,6 @@ class NewsViewModelTest {
         Assert.assertTrue(viewModel.errorMessage.isNullOrEmpty())
         testScheduler.triggerActions()
         Assert.assertEquals(viewModel.errorMessage, "request failed")
-
     }
 
 }
