@@ -52,6 +52,19 @@ android {
             signingConfig signingConfigs.config
         }
     }
+
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
+
+    sourceSets {
+        androidTest {
+            java.srcDirs += "src/sharedTest/java"
+        }
+        test {
+            java.srcDirs += "src/sharedTest/java"
+        }
+    }
 }
 
 allOpen {
@@ -101,4 +114,13 @@ dependencies {
     androidTestImplementation deps.test.mockito_core
     androidTestImplementation deps.android_test.ext_junit
     androidTestImplementation deps.android_test.mockito_android
+
+    testImplementation deps.android_test.core
+    testImplementation deps.android_test.rules
+    testImplementation deps.android_test.runner
+    testImplementation deps.android_test.espresso_core
+    testImplementation deps.android_test.espresso_contrib
+    testImplementation deps.android_test.ext_junit
+    testImplementation 'org.robolectric:robolectric:4.3'
+
 }
