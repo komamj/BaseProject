@@ -56,10 +56,10 @@ class NewsViewModelTest {
         `when`(repository.getNews()).thenReturn(Observable.just(newsList))
         viewModel.getNews()
         verify(repository).getNews()
-        Assert.assertEquals(viewModel.newsList.size, 3)
-        Assert.assertEquals(news1,viewModel.newsList[0])
-        Assert.assertEquals(news2,viewModel.newsList[1])
-        Assert.assertEquals(news3,viewModel.newsList[2])
+        Assert.assertEquals(viewModel.newsList.value?.size, 3)
+        Assert.assertEquals(news1, viewModel.newsList.value?.get(0))
+        Assert.assertEquals(news2,viewModel.newsList.value?.get(1))
+        Assert.assertEquals(news3,viewModel.newsList.value?.get(2))
 
     }
 
