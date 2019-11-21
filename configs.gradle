@@ -73,6 +73,8 @@ ext {
     extJunitVersion = '1.1.1'
     rulesVersion = '1.2.0'
     archCoreVersion = '2.1.0'
+
+    robolectricVersion = '4.3.1'
 }
 
 /**
@@ -159,22 +161,31 @@ deps.timber = "com.jakewharton.timber:timber:$timberVersion"
 
 def test = [:]
 test.junit = "junit:junit:$junitVersion"
-test.mockito_core = "org.mockito:mockito-core:$mockitoCoreVersion"
 test.mockito_all = "org.mockito:mockito-all:$mockitoAllVersion"
 test.mock_web_server = "com.squareup.okhttp3:mockwebserver:$mockwebserverVersion"
-test.arch_core = "androidx.arch.core:core-testing:$archCoreVersion"
-
+test.robolectric = "org.robolectric:robolectric:$robolectricVersion"
 deps.test = test
 
 def android_test = [:]
-android_test.mockito_android = "org.mockito:mockito-android:$mockitoAndroidVersion"
-android_test.runner = "androidx.test:runner:$runnerVersion"
-android_test.espresso_core = "androidx.test.espresso:espresso-core:$espressoCoreVersion"
-android_test.espresso_contrib = "androidx.test.espresso:espresso-contrib:$espressoCoreVersion"
 android_test.espresso_intents = "androidx.test.espresso:espresso-intents:$espressoCoreVersion"
-android_test.core = "androidx.test:core:$testCoreVersion"
-android_test.ext_junit = "androidx.test.ext:junit:$extJunitVersion"
-android_test.rules = "androidx.test:rules:$rulesVersion"
+android_test.robolectric_annotations = "org.robolectric:annotations:$robolectricVersion"
+android_test.mockito_android = "org.mockito:mockito-android:$mockitoAndroidVersion"
 deps.android_test = android_test
+
+def shared_test = [:]
+shared_test.mockito_core = "org.mockito:mockito-core:$mockitoCoreVersion"
+
+shared_test.core = "androidx.test:core:$testCoreVersion"
+shared_test.runner = "androidx.test:runner:$runnerVersion"
+shared_test.ext_junit = "androidx.test.ext:junit:$extJunitVersion"
+shared_test.rules = "androidx.test:rules:$rulesVersion"
+
+shared_test.arch_core = "androidx.arch.core:core-testing:$archCoreVersion"
+
+shared_test.espresso_core = "androidx.test.espresso:espresso-core:$espressoCoreVersion"
+shared_test.espresso_contrib = "androidx.test.espresso:espresso-contrib:$espressoCoreVersion"
+shared_test.espresso_intents = "androidx.test.espresso:espresso-intents:$espressoCoreVersion"
+
+deps.shared_test = shared_test
 
 ext.deps = deps
