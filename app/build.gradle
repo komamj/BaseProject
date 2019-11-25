@@ -50,6 +50,22 @@ android {
         }
         debug {
             signingConfig signingConfigs.config
+            testCoverageEnabled = true
+        }
+    }
+
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
+
+    flavorDimensions "version"
+
+    sourceSets {
+        androidTest {
+            java.srcDirs += "src/sharedTest/java"
+        }
+        test {
+            java.srcDirs += "src/sharedTest/java"
         }
     }
 }
@@ -87,18 +103,26 @@ dependencies {
     implementation deps.network.gson
     implementation deps.network.rxjava2
 
+    testImplementation deps.shared_test.core
+    testImplementation deps.shared_test.rules
+    testImplementation deps.shared_test.runner
+    testImplementation deps.shared_test.espresso_core
+    testImplementation deps.shared_test.espresso_contrib
+    testImplementation deps.shared_test.ext_junit
+    testImplementation deps.shared_test.arch_core
+    testImplementation deps.shared_test.mockito_core
     testImplementation deps.test.junit
-    testImplementation deps.test.mockito_core
     testImplementation deps.test.mock_web_server
-    testImplementation deps.test.arch_core
+    testImplementation deps.test.robolectric
 
-    androidTestImplementation deps.android_test.core
-    androidTestImplementation deps.android_test.rules
-    androidTestImplementation deps.android_test.runner
-    androidTestImplementation deps.android_test.espresso_core
-    androidTestImplementation deps.android_test.espresso_contrib
-    androidTestImplementation deps.test.arch_core
-    androidTestImplementation deps.test.mockito_core
-    androidTestImplementation deps.android_test.ext_junit
+    androidTestImplementation deps.shared_test.core
+    androidTestImplementation deps.shared_test.rules
+    androidTestImplementation deps.shared_test.runner
+    androidTestImplementation deps.shared_test.espresso_core
+    androidTestImplementation deps.shared_test.espresso_contrib
+    androidTestImplementation deps.shared_test.ext_junit
+    androidTestImplementation deps.shared_test.arch_core
+    androidTestImplementation deps.shared_test.mockito_core
     androidTestImplementation deps.android_test.mockito_android
+    androidTestImplementation deps.android_test.robolectric_annotations
 }

@@ -19,7 +19,7 @@ class NewsViewModel constructor(private val repository: NewsRepository) : ViewMo
     fun getNews() {
         isLoading = true
         errorMessage = ""
-        var disposable = repository.getNews()
+        val disposable = repository.getNews()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

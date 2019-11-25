@@ -25,11 +25,11 @@ class NewsListAdapter: ListAdapter<News, NewsListAdapter.NewsVH>(NewsDiffCallbac
 
     private class NewsDiffCallback : DiffUtil.ItemCallback<News>() {
         override fun areItemsTheSame(oldItem: News, newItem: News): Boolean {
-            return oldItem.title.equals(newItem.title)
+            return oldItem.title == newItem.title
         }
 
         override fun areContentsTheSame(oldItem: News, newItem: News): Boolean {
-            return oldItem.equals(newItem)
+            return oldItem == newItem
         }
     }
 }
